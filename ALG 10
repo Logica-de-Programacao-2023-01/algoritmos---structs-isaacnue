@@ -1,0 +1,54 @@
+package main
+
+import "fmt"
+
+type Filme struct {
+	titulo     string
+	diretor    string
+	ano        int
+	avaliacoes []int
+}
+
+func main() {
+	filme := Filme{
+		titulo:     "Filme A",
+		diretor:    "Diretor A",
+		ano:        2021,
+		avaliacoes: []int{4, 5, 3, 4, 5},
+	}
+
+	adicionarAvaliacao(&filme, 4)
+	removerAvaliacao(&filme, 3)
+
+	media := calcularMediaAvaliacoes(filme)
+	imprimirFilme(filme, media)
+}
+
+func adicionarAvaliacao(f *Filme, avaliacao int) {
+	f.avaliacoes = append(f.avaliacoes, avaliacao)
+}
+
+func removerAvaliacao(f *Filme, avaliacao int) {
+	for i, a := range f.avaliacoes {
+		if a == avaliacao {
+			f.avaliacoes = append(f.avaliacoes[:i], f.avaliacoes[i+1:]...)
+			break
+		}
+	}
+}
+
+func calcularMediaAvaliacoes(f Filme) float64 {
+	soma := 0
+	for _, avaliacao := range f.avaliacoes {
+		soma += avaliacao
+	}
+	return float64(soma) / float64(len(f.avaliacoes))
+}
+
+func imprimirFilme(f Filme, media float64) {
+	fmt.Println("Título:", f.titulo)
+	fmt.Println("Diretor:", f.diretor)
+	fmt.Println("Ano:", f.ano)
+	fmt.Println("Avaliações:", f.avaliacoes)
+	fmt.Printf("Média das avaliações: %.2f\n", media)
+}
