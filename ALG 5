@@ -1,0 +1,52 @@
+package main
+
+import "fmt"
+
+type Musica struct {
+	titulo   string
+	artista  string
+	duracao  string
+}
+
+type Playlist struct {
+	nome    string
+	musicas []Musica
+}
+
+func main() {
+	playlists := []Playlist{
+		{
+			nome: "Playlist 1",
+			musicas: []Musica{
+				{titulo: "Música 1", artista: "Artista 1", duracao: "3m30s"},
+				{titulo: "Música 2", artista: "Artista 2", duracao: "4m15s"},
+			},
+		},
+		{
+			nome: "Playlist 2",
+			musicas: []Musica{
+				{titulo: "Música 2", artista: "Artista 2", duracao: "4m15s"},
+				{titulo: "Música 3", artista: "Artista 3", duracao: "2m45s"},
+			},
+		},
+	}
+	titulo := "Música 2"
+	playlistsEncontradas := encontrarPlaylistsPorTitulo(playlists, titulo)
+	fmt.Println("Playlists encontradas:")
+	for _, p := range playlistsEncontradas {
+		fmt.Println(p.nome)
+	}
+}
+
+func encontrarPlaylistsPorTitulo(playlists []Playlist, titulo string) []Playlist {
+	var playlistsEncontradas []Playlist
+	for _, p := range playlists {
+		for _, musica := range p.musicas {
+			if musica.titulo == titulo {
+				playlistsEncontradas = append(playlistsEncontradas, p)
+				break
+			}
+		}
+	}
+	return playlistsEncontradas
+}
