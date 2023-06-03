@@ -1,0 +1,21 @@
+package main
+
+import "fmt"
+
+type Triangulo struct {
+	base   float64
+	altura float64
+}
+
+func main() {
+	triangulo := Triangulo{
+		base:   6.0,
+		altura: 4.0,
+	}
+	area := calcularAreaTriangulo(triangulo)
+	fmt.Printf("A área do triângulo é: %.2f\n", area)
+}
+
+func calcularAreaTriangulo(t Triangulo) float64 {
+	return (t.base * t.altura) / 2
+}
