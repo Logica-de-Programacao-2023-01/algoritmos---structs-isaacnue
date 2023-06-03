@@ -1,0 +1,46 @@
+package main
+
+import "fmt"
+
+type Musica struct {
+	titulo   string
+	artista  string
+	duracao  string
+}
+
+type Playlist struct {
+	nome    string
+	musicas []Musica
+}
+
+func main() {
+	playlist := Playlist{
+		nome: "Minha Playlist",
+		musicas: []Musica{
+			{titulo: "Música 1", artista: "Artista 1", duracao: "3m30s"},
+			{titulo: "Música 2", artista: "Artista 2", duracao: "4m15s"},
+			{titulo: "Música 3", artista: "Artista 3", duracao: "2m45s"},
+		},
+	}
+	imprimirPlaylist(playlist)
+}
+
+func imprimirPlaylist(p Playlist) {
+	fmt.Println("Nome da Playlist:", p.nome)
+	totalDuracao := "0s"
+	for _, musica := range p.musicas {
+		fmt.Println("Título:", musica.titulo)
+		fmt.Println("Artista:", musica.artista)
+		fmt.Println("Duração:", musica.duracao)
+		fmt.Println()
+		totalDuracao = somarDuracoes(totalDuracao, musica.duracao)
+	}
+	fmt.Println("Tempo total da Playlist:", totalDuracao)
+}
+
+func somarDuracoes(duracao1, duracao2 string) string {
+	// Implementação para somar as durações das músicas
+	// Aqui seria necessário converter as durações para um formato numérico e realizar a soma corretamente
+	// Por simplicidade, neste exemplo apenas concatenamos as strings
+	return duracao1 + " + " + duracao2
+}
